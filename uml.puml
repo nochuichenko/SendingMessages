@@ -1,0 +1,54 @@
+@startuml
+class application.Start {
++ {static} void main(String[])
+}
+class application.MainController {
+- ResourceBundle resources
+- URL location
+- Button mailingButton
+- TextField mailsFilePath
+- TextField messageFilePath
+- Label completedLabel
+- Label errorLabel
+~ void initialize()
+- boolean isValidFilePath(String)
+- void mailingExecution(String,String)
+}
+class application.Decryptor {
+- {static} String secretKey
++ {static} String encrypt(String)
++ {static} String decrypt(String)
+}
+class application.Mailing {
+~ {static} User user
+~ String senderEmail
+~ String senderPassword
+~ Map<String,String> recipientEmails
+~ String mailsFilePath
+- {static} Logger logger
++ boolean startMailing()
+- Message makeMessage(String,String)
+- Session makeSession()
+- void connectionProperties(Properties)
+- Map<String,String> getRecipients()
+- List<String> readLinesFromFile(File)
+- boolean isValidEmail(String)
+}
+class application.WorkingWithFiles {
+- {static} Logger logger
++ {static} String readingFiles(String)
+}
+class application.User {
+- String login
+- String password
++ String getLogin()
++ String getPassword()
+}
+class application.Main {
++ void start(Stage)
++ {static} void main(String[])
+}
+
+
+javafx.application.Application <|-- application.Main
+@enduml
